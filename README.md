@@ -1,1 +1,1 @@
-# green-thumb
+# Green thumb
