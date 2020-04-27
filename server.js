@@ -5,6 +5,25 @@ const app = require('./app');
 
 const PORT = parseInt(process.env.PORT, 10);
 
+console.log("YIAH,,,,,,,,,,,,,,,,,,,,,")
+
+app.use((req, res, next) => {
+  console.log("HEY:.............,", res)
+  res.status(404);
+  res.render('not-found');
+});
+
+app.use((err, req, res, next) => {
+  // always log the error
+  console.error('ERROR', req.method, req.path, err);
+
+  // only render if the error ocurred before sending the response
+  if (!res.headersSent) {
+    res.status(500);
+    res.render('error');
+  }
+});
+
 const terminate = error => {
   if (error) debug(error);
   const exitCode = error && error instanceof Error ? 1 : 0;
