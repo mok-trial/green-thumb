@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Plant = require('../../models/Plant');
-const UserPlant = require('../../models/UserPlant');
-const User = require('../../models/User');
-
+const Plant = require("../../models/Plant");
+const UserPlant = require("../../models/UserPlant");
+const User = require("../../models/User");
 
 // middleware that checks if a user is logged in
 const loginCheck = () => {
@@ -12,34 +11,25 @@ const loginCheck = () => {
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.redirect('/auth/login');
+      res.redirect("/auth/login");
     }
   };
 };
 
-
-router.get('/', loginCheck(), (req, res) => {
-
-  
+router.get("/", loginCheck(), (req, res) => {
   const user = req.user;
-  res.render('addPlant/addPlantFromDB', { user: user});
-});
 
-
-//BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK! 
-
-
-
-
-router.get('/', (req, res, next) => {
   Plant.find()
     .then((plants) => {
-      res.render("plants/index", { plantsList: plants });
+      const categories = [...new Set(plants.map((plant) => plant.category))];
+      res.render("addPlant/addPlantFromDB", { plants, user, categories });
     })
     .catch((err) => {
       next(err);
     });
 });
+
+//BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK!
 
 router.post("/", (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -51,7 +41,7 @@ router.post("/", (req, res, next) => {
     name: req.body.name,
     notes: req.body.notes,
     //to add: watering schedule, plant from database
-    owner: req.user._id
+    owner: req.user._id,
   })
     .then((plant) => {
       console.log(plant);
