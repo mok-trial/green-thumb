@@ -129,8 +129,19 @@ app.use("/", index);
 const addDBPlant = require("./routes/addPlant/addDBPlant");
 app.use("/addPlant", addDBPlant);
 
+const confirmDbPlant = require("./routes/addPlant/confirmDbPlant");
+app.use("/confirmPlant", confirmDbPlant);
+
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
+
+const addCustomPlant = require("./routes/addPlant/addCustomPlant");
+app.use("/customPlant", addCustomPlant);
+
+const plantDetails = require("./routes/dashboard/plantDetails");
+app.use("/plantDetail", plantDetails);
+
+
 
 
 module.exports = app;
