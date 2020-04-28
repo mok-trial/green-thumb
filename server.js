@@ -5,10 +5,7 @@ const app = require('./app');
 
 const PORT = parseInt(process.env.PORT, 10);
 
-console.log("YIAH,,,,,,,,,,,,,,,,,,,,,")
-
 app.use((req, res, next) => {
-  console.log("HEY:.............,", res)
   res.status(404);
   res.render('not-found');
 });
