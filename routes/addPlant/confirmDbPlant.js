@@ -22,9 +22,8 @@ router.get('/', loginCheck(), (req, res) => {
 
 
 
-
     const user = req.user;
-    res.render('dashboard/plantdetail', { user: user} );
+    res.render('addPlant/confirmPlantfromDB', { user: user} );
 
 
   });
