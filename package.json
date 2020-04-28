@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./server",
     "dev": "nodemon ./server",
-    "dev:debug": "DEBUG=green-thumb* npm run dev"
+    "dev:debug": "DEBUG=green-thumb* npm run dev",
+    "scrape": "node ./seed/scraper.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "mocha": "^7.0.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "fs": "0.0.1-security"
   }
 }
