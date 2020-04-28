@@ -10,6 +10,16 @@ const plantSchema = new Schema({
   soil: String,
   propagation: String,
   humidity: String,
+  category: {
+    type: String,
+    enum: [
+      "Flowering House Plants",
+      "Foliage Type Plants",
+      "Succulents and Cacti",
+      "Fern Type Plants",
+      "Trailing & Climbing Plants",
+    ],
+  },
 });
 const Plant = mongoose.model("Plant", plantSchema);
 
