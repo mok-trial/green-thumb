@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const Plant = require('../../models/Plant');
 const UserPlant = require('../../models/UserPlant');
@@ -33,17 +33,17 @@ router.get('/', loginCheck(), (req, res) => {
 
 router.get('/', (req, res, next) => {
   Plant.find()
-    .then(plants => {
-      res.render('plants/index', { plantsList: plants });
+    .then((plants) => {
+      res.render("plants/index", { plantsList: plants });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
   if (!req.isAuthenticated()) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
@@ -53,22 +53,22 @@ router.post('/', (req, res, next) => {
     //to add: watering schedule, plant from database
     owner: req.user._id
   })
-    .then(plant => {
+    .then((plant) => {
       console.log(plant);
-      res.redirect('/plants');
+      res.redirect("/plants");
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
 
 // deletes the plant
-// an admin can delete any plant - a user can only delete can only 
+// an admin can delete any plant - a user can only delete can only
 // delete it when she is the owner
-router.get('/:plantId/', (req, res, next) => {
+router.get("/:plantId/", (req, res, next) => {
   const query = { _id: req.params.plantId };
 
-  if (req.user.role !== 'admin') {
+  if (req.user.role !== "admin") {
     query.owner = req.user._id;
   }
 
@@ -79,9 +79,9 @@ router.get('/:plantId/', (req, res, next) => {
 
   Plant.findOneAndDelete(query)
     .then(() => {
-      res.redirect('/plants');
+      res.redirect("/plants");
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
