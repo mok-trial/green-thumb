@@ -15,7 +15,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/about', (req, res) => {
 
-  res.render('about');
+  const user = req.user;
+  res.render('about', { user: user } );
 })
 
 // middleware that checks if a user is logged in
@@ -33,8 +34,8 @@ const loginCheck = () => {
 
 
 
-router.get('/profile', loginCheck(), (req, res) => {
+/* router.get('/profile', loginCheck(), (req, res) => {
   res.render('profile');
-});
+}); */
 
 module.exports = router;

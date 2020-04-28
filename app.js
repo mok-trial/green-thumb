@@ -141,6 +141,9 @@ app.use("/customPlant", addCustomPlant);
 const plantDetails = require("./routes/dashboard/plantDetails");
 app.use("/plantDetail", plantDetails);
 
+const profile = require("./routes/dashboard/profile");
+app.use("/profile", profile);
+
 
 
 
