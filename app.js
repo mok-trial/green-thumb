@@ -24,7 +24,7 @@ mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
 
 mongoose
-  .connect("mongodb://localhost/root-directory", { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/root-directory", { useNewUrlParser: true })
   .then((x) => {
     console.log(
       `Connected to Mongo! Database name: '${x.connections[0].name}'`
@@ -126,10 +126,11 @@ app.locals.title = "Root Directory";
 const index = require("./routes/index");
 app.use("/", index);
 
+const addDBPlant = require("./routes/addPlant/addDBPlant");
+app.use("/addPlant", addDBPlant);
+
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
-const plantsRoutes = require("./routes/plants");
-app.use("/plants", plantsRoutes);
 
 module.exports = app;

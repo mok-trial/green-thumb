@@ -1,10 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const Plant = require('../models/Plant');
+const Plant = require('../../models/Plant');
+const UserPlant = require('../../models/UserPlant');
+const User = require('../../models/User');
 
-router.get('/add', (req, res) => {
-  res.render('plants/add');
+
+// middleware that checks if a user is logged in
+const loginCheck = () => {
+  return (req, res, next) => {
+    // passport method req.isAuthenticated()
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect('/auth/login');
+    }
+  };
+};
+
+
+router.get('/', loginCheck(), (req, res) => {
+
+  
+  const user = req.user;
+  res.render('addPlant/addPlantFromDB', { user: user});
 });
+
+
+//BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK! 
+
+
+
 
 router.get('/', (req, res, next) => {
   Plant.find()
@@ -23,9 +48,9 @@ router.post('/', (req, res, next) => {
   }
 
   Plant.create({
-    price: req.body.price,
     name: req.body.name,
-    description: req.body.description,
+    notes: req.body.notes,
+    //to add: watering schedule, plant from database
     owner: req.user._id
   })
     .then(plant => {
