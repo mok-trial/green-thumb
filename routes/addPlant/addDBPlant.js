@@ -29,51 +29,69 @@ router.get("/", loginCheck(), (req, res) => {
     });
 });
 
+router.get("/:id", loginCheck(), (req, res) => {
+  const user = req.user;
+
+  //   res.send(req.params.id);
+  Plant.findById(req.params.id)
+    .then((plant) => {
+      //   res.send(plant);
+      const userPlant = UserPlant.schema.obj.waterSchedule.enum;
+      console.log(userPlant);
+      res.render("addPlant/ConfirmPlantFromDB", { plant, user, userPlant });
+    })
+    .catch((err) => {
+      console.log(err);
+      // logs the error to the console
+      next(err);
+    });
+});
+
 //BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK!
 
-router.post("/", (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    res.redirect("/");
-    return;
-  }
+// router.post("/", (req, res, next) => {
+//   if (!req.isAuthenticated()) {
+//     res.redirect("/");
+//     return;
+//   }
 
-  Plant.create({
-    name: req.body.name,
-    notes: req.body.notes,
-    //to add: watering schedule, plant from database
-    owner: req.user._id,
-  })
-    .then((plant) => {
-      console.log(plant);
-      res.redirect("/plants");
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+//   Plant.create({
+//     name: req.body.name,
+//     notes: req.body.notes,
+//     //to add: watering schedule, plant from database
+//     owner: req.user._id,
+//   })
+//     .then((plant) => {
+//       console.log(plant);
+//       res.redirect("/plants");
+//     })
+//     .catch((err) => {
+//       next(err);
+//     });
+// });
 
-// deletes the plant
-// an admin can delete any plant - a user can only delete can only
-// delete it when she is the owner
-router.get("/:plantId/", (req, res, next) => {
-  const query = { _id: req.params.plantId };
+// // deletes the plant
+// // an admin can delete any plant - a user can only delete can only
+// // delete it when she is the owner
+// router.get("/:plantId/", (req, res, next) => {
+//   const query = { _id: req.params.plantId };
 
-  if (req.user.role !== "admin") {
-    query.owner = req.user._id;
-  }
+//   if (req.user.role !== "admin") {
+//     query.owner = req.user._id;
+//   }
 
-  // if user.role !== 'admin'
-  // query: { _id: req.params.plantId, owner: req.user._id }
-  // else if user.role === 'admin'
-  // query; { _id: req.params.plantId }
+//   // if user.role !== 'admin'
+//   // query: { _id: req.params.plantId, owner: req.user._id }
+//   // else if user.role === 'admin'
+//   // query; { _id: req.params.plantId }
 
-  Plant.findOneAndDelete(query)
-    .then(() => {
-      res.redirect("/plants");
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+//   Plant.findOneAndDelete(query)
+//     .then(() => {
+//       res.redirect("/plants");
+//     })
+//     .catch((err) => {
+//       next(err);
+//     });
+// });
 
 module.exports = router;

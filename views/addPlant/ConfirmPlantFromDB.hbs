@@ -1,4 +1,29 @@
+<style>
+    li {
+        list-style-type: none
+    }
+</style>
+
 <p>confirm plant from database</p>
 
+
+<ul>
+    <li>
+        <span>Add a custom name: </span>
+        <input type="text">
+    </li>
+    <li>
+        <span>Watering Schedule: </span>
+        <select name="" id="">
+            {{#each userPlant}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </li>
+    <li>
+        <span>Notes: </span>
+        <input type="text">
+    </li>
+</ul>
 
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>

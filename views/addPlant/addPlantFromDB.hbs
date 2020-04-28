@@ -6,10 +6,9 @@
 {{#each categories}}
 <button type="button" onclick="handleClick(`{{this}}`)">{{this}}</button>
 {{/each}}
-
-
+<button type="button" onclick="showAll()">All</button>
 {{#each plants}}
-<p><a href="/plants/{{_id}}" style="display: none" class="plants" data-category="{{category}}">{{commonName}}</a></p>
+<p><a href="/addPlant/{{_id}}" style="display: none" class="plants" data-category="{{category}}">{{commonName}}</a></p>
 {{/each}}
 
 <script>
@@ -18,5 +17,9 @@
         const plantsToHide = Array.from(document.querySelectorAll(`.plants:not([data-category="${category}"])`))
         plants.forEach(plant => plant.style.display = "flex")
         plantsToHide.forEach(plant => plant.style.display = "none")
+    }
+    const showAll = () => {
+        const plants = Array.from(document.querySelectorAll(".plants"));
+        plants.forEach(plant => plant.style.display = "flex")
     }
 </script>
