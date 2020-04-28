@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
@@ -51,5 +52,9 @@ a {
   margin: 20px auto;
   padding: 20px;
   width: 100%; }
+
+.website-name {
+  font-family: "Merriweather", serif;
+  font-size: 5em; }
 
 /*# sourceMappingURL=style.css.map */
