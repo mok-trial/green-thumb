@@ -1,15 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const plantSchema = new Schema({
-  name: String,
-  notes: String,
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  commonName: String,
+  scientificName: String,
+  image: String,
+  light: String,
+  watering: String,
+  soil: String,
+  propagation: String,
+  humidity: String,
 });
-
-const Plant = mongoose.model('Plant', plantSchema);
+const Plant = mongoose.model("Plant", plantSchema);
 
 module.exports = Plant;
