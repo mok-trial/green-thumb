@@ -29,16 +29,16 @@
     <section>
         <form action="/addPlant/{{plantId}}" method="POST">
             <label for="customName">Add a custom name: </label>
-            <input type="text" id="customName">
+            <input type="text" id="customName" name="customName">
             <label for="watering">Watering Schedule: </label>
-            <select name="" id="" id="watering">
+            <select name="waterSchedule" id="" id="watering">
                 {{#each userPlant}}
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
 
             <label for="notes">Notes: </label>
-            <textarea style="height: 10rem" type="text" id="notes"></textarea>
+            <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
             <button type="submit">Add a Plant</button>
         </form>
     </section>

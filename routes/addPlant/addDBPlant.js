@@ -56,7 +56,7 @@ router.post("/:plantId", (req, res) => {
     .then((data) => {
       console.log(`Success ${data} was added to the database`);
 
-      res.redirect("../dashboard/profile");
+      res.redirect("/");
     })
     .catch((err) => res.render("addPlant/addPlantFromDB"));
 });
