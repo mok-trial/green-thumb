@@ -60,9 +60,8 @@ router.post(
   uploadCloud.single("photo"),
   loginCheck(),
   (req, res) => {
-    const { customName, waterSchedule, notes } = req.body;
+    const { customName, waterSchedule, lastWater, notes } = req.body;
     const plantInfo = req.params.plantId;
-
     const imgPath = req.file.url;
     const imgName = req.file.originalname;
     const userId = req.user._id;
