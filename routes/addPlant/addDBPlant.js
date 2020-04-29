@@ -63,11 +63,11 @@ router.post(
     const { customName, waterSchedule, lastWater, notes } = req.body;
     const plantInfo = req.params.plantId;
 
-    const defaultUserImage = "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
+    const defaultUserImage =
+      "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
     let imgPath = req.file ? req.file.url : defaultUserImage;
-    let imgName = req.file ? req.file.originalname : 'default-image';
+    let imgName = req.file ? req.file.originalname : "default-image";
 
- 
     const userId = req.user._id;
 
     UserPlant.create({
@@ -77,7 +77,7 @@ router.post(
       plantInfo,
       imgName,
       imgPath,
-      lastWater
+      lastWater,
     })
 
       .then((userPlant) => {
