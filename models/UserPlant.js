@@ -12,14 +12,13 @@ const userPlantSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },   //Fairly certain not needed (not used on w5d2 lecture material - KS) */
-  
+
   waterSchedule: {
     type: String,
     enum: [
       "Daily",
       "Every other day",
       "Twice a week",
-      "Semiweekly",
       "Weekly",
       "Biweekly",
       "Monthly"
