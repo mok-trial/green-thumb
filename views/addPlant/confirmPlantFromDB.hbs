@@ -36,7 +36,8 @@
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
-
+            <label for="lastWatered">Last Watered on:</label>
+            <input type="date" id="lastWatered" name="lastWatered" value={{today}} min={{startOfThisYear}} max={{today}}>   
             <label for="notes">Notes: </label>
             <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
             <button type="submit">Add a Plant</button>
