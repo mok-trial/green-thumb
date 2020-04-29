@@ -1,3 +1,30 @@
 <p>add plant from database</p>
 
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+
+<h2>Categories</h2>
+{{#each categories}}
+<div class="category">
+    <button type="button" onclick="handleClick(`{{this}}`)">{{this}}</button>
+</div>
+{{/each}}
+<button type="button" onclick="showAll()">All</button>
+{{#each plants}}
+<p><a href="/addPlant/{{_id}}" style="display: none" class="plants" data-category="{{category}}">
+        {{commonName}}
+        <img src="{{image}}" alt="" height="200">
+    </a></p>
+{{/each}}
+
+<script>
+    const handleClick = (category) => {
+        const plants = Array.from(document.querySelectorAll(`.plants[data-category="${category}"]`))
+        const plantsToHide = Array.from(document.querySelectorAll(`.plants:not([data-category="${category}"])`))
+        plants.forEach(plant => plant.style.display = "flex")
+        plantsToHide.forEach(plant => plant.style.display = "none")
+    }
+    const showAll = () => {
+        const plants = Array.from(document.querySelectorAll(".plants"));
+        plants.forEach(plant => plant.style.display = "flex")
+    }
+</script>
