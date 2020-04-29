@@ -55,9 +55,9 @@ router.get("/:id", loginCheck(), (req, res) => {
 });
 
 router.post("/:plantId", (req, res) => {
-  const { customName, waterSchedule, notes } = req.body;
+  const { customName, waterSchedule, lastWater, notes } = req.body;
   const plantInfo = req.params.plantId;
-  UserPlant.create({ customName, waterSchedule, notes, plantInfo })
+  UserPlant.create({ customName, waterSchedule, lastWater, notes, plantInfo })
     .then((data) => {
       console.log(`Success ${data} was added to the database`);
 
