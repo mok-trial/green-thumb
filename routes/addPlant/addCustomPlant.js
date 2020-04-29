@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const uploadCloud = require("../../config/cloudinary.js");
 const Plant = require('../../models/Plant');
 const UserPlant = require('../../models/UserPlant');
 const User = require('../../models/User');
@@ -18,14 +19,50 @@ const loginCheck = () => {
 };
 
 
+
 router.get('/', loginCheck(), (req, res) => {
 
 
     const user = req.user;
-    res.render('addPlant/addPlantCustom', { user: user} );
+    const userPlant = UserPlant.schema.obj.waterSchedule.enum;
 
+
+    res.render('addPlant/addPlantCustom', { user, userPlant } );
 
   });
+
+
+  router.post("/", uploadCloud.single("photo"), loginCheck(),  (req, res, next) => {
+
+    const {customName, waterSchedule, notes} = req.body;
+    console.log('test')
+ 
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
+
+    const userId = req.user._id
+
+
+    UserPlant.create({customName, waterSchedule, notes, imgPath, imgName})
+      .then(userPlant => {
+
+        console.log('plant added')
+        User.updateOne({_id: userId}, { $push: {plantCollection: userPlant} })
+        .catch(error => {
+          console.log(error)
+        })
+
+      })
+
+      .then(() => {
+        res.redirect("/profile")
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+  })
+
 
 
   module.exports = router;
