@@ -140,7 +140,7 @@ puppeteer.launch({ headless: true }).then(async (browser) => {
         plant.commonName = document
           .querySelectorAll(".table")[0]
           .querySelector("tbody > tr:nth-child(2) > td:nth-child(2)")
-          .innerText.split(".")[0];
+          .innerText.split(/[,.]/)[0];
       } catch (exception) {}
       try {
         plant.scientificName = document.querySelector("h1").innerText;

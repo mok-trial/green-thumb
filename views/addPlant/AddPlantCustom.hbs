@@ -1,1 +1,41 @@
-<p>Add a Custom Plant</p>
+<p>add custom plant</p>
+
+<a href="/addplant">Go back to plant list</a>
+
+<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+
+
+<form action="/customplant" method="POST" enctype="multipart/form-data">
+
+
+<label for="name">Custom Name:</label>
+<input type="text" name="customName" id="name">
+<br><br>
+
+
+<label for="schedule">Watering Schedule:</label>
+<select name="waterSchedule" id="schedule">
+<br><br>
+
+
+{{#each userPlant}}
+<option value="{{this}}">{{this}}</option>
+    {{/each}}
+</select>
+<br><br>
+
+
+<label>Add an Image</label> 
+<input type="file" name="photo">
+<br><br>
+
+<label for="notes">Notes:</label>
+<textarea id="notes" name="notes" rows="4" cols="25"></textarea>
+<br><br>
+
+<button type="submit">Add Plant</button>
+
+</form>
+
+
+
