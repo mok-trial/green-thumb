@@ -31,11 +31,14 @@
             <label for="customName">Add a custom name: </label>
             <input type="text" id="customName" name="customName">
             <label for="watering">Watering Schedule: </label>
-            <select name="waterSchedule" id="" id="watering">
+            <select name="waterSchedule" id="wateringSchedule">
                 {{#each userPlant}}
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
+
+            <label for="lastWatered">Last Watered on:</label>
+            <input type="date" id="lastWatered" name="lastWatered" value={{today}} min={{startOfThisYear}} max={{today}}>
 
             <label for="notes">Notes: </label>
             <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
@@ -43,4 +46,4 @@
         </form>
     </section>
 </div>
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p> 

@@ -36,7 +36,7 @@ router.get("/:id", loginCheck(), (req, res) => {
     .then((plant) => {
       const userPlant = UserPlant.schema.obj.waterSchedule.enum;
       const plantId = req.params.id;
-      res.render("addPlant/ConfirmPlantFromDB", {
+      res.render("addPlant/confirmPlantFromDB", {
         plant,
         user,
         userPlant,
