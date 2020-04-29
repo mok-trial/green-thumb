@@ -3,6 +3,7 @@ const router = express.Router();
 const Plant = require("../../models/Plant");
 const UserPlant = require("../../models/UserPlant");
 const User = require("../../models/User");
+const moment = require("moment")
 
 // middleware that checks if a user is logged in
 const loginCheck = () => {
@@ -31,7 +32,9 @@ router.get("/", loginCheck(), (req, res) => {
 
 router.get("/:id", loginCheck(), (req, res) => {
   const user = req.user;
-
+  const today = moment().format('YYYY-MM-DD')
+  const startOfThisYear = moment().format('YYYY-01-01')
+  
   Plant.findById(req.params.id)
     .then((plant) => {
       const userPlant = UserPlant.schema.obj.waterSchedule.enum;
@@ -41,6 +44,8 @@ router.get("/:id", loginCheck(), (req, res) => {
         user,
         userPlant,
         plantId,
+        today,
+        startOfThisYear
       });
     })
     .catch((err) => {
