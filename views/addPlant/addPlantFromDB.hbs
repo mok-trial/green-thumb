@@ -4,7 +4,9 @@
 
 <h2>Categories</h2>
 {{#each categories}}
-<button type="button" onclick="handleClick(`{{this}}`)">{{this}}</button>
+<div class="category">
+    <button type="button" onclick="handleClick(`{{this}}`)">{{this}}</button>
+</div>
 {{/each}}
 <button type="button" onclick="showAll()">All</button>
 {{#each plants}}

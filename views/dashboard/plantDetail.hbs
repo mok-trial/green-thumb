@@ -1,5 +1,65 @@
+<style>
+    .plant-detail-flex {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
 <p>plant details</p>
 
 <a href="/profile">Back</a>
+
+{{#with plant}}
+<h1>{{customName}}</h1>
+{{/with}}
+
+{{#with plant.plantInfo}}
+<h2>{{scientificName}}</h2>
+{{/with}}
+
+
+
+
+<div class="plant-detail-flex">
+    {{#with plant.plantInfo}}
+    <section class="plantInfo">
+        <h1>{{commonName}}</h1>
+        <h3>Scientific Name: {{scientificName}}</h2>
+            <img src="{{image}}" alt="">
+            <p><b>Watering: </b>{{watering}}</p>
+            <p><b><span>Light: </b></span>{{light}}</p>
+            <p></b><span>Soil: </b></span>{{soil}}</p>
+    </section>
+    {{/with}}
+
+
+    <section>
+        <div>
+            <h3 for="customName">Custom name: </h3>
+            <p>{{plant.customName}}</p>
+            {{!--             
+
+            <label for="watering">Watering Schedule: </label>
+            <select name="waterSchedule" id="" id="watering">
+                {{#each userPlant}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+
+            <label for="notes">Notes: </label>
+            <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
+            <button type="submit">Add a Plant</button> --}}
+        </div>
+    </section>
+</div>
+
+
+
+
+
 
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
