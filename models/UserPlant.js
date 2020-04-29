@@ -8,10 +8,6 @@ const userPlantSchema = new Schema({
     ref: "Plant"
   },
   notes: String,
-  /* owner: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },   //Fairly certain not needed (not used on w5d2 lecture material - KS) */
 
   waterSchedule: {
     type: String,
@@ -24,14 +20,17 @@ const userPlantSchema = new Schema({
       "Monthly"
     ]
   },
-  
+
   lastWater: String,
 
   imgName: String, //Name on cloudinary
 
-  imgPath: String  //Links to cloudinary
+  imgPath: {
+    type: String,  //Links to cloudinary
+    default: "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/icons8-plant-96_xbgilv.png"
+  }
+  });
 
-});
 
 const UserPlant = mongoose.model("UserPlant", userPlantSchema);
 
