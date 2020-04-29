@@ -8,22 +8,28 @@ const userPlantSchema = new Schema({
     ref: "Plant"
   },
   notes: String,
-  owner: {
+  /* owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
-  },
+  },   //Fairly certain not needed (not used on w5d2 lecture material - KS) */
+
   waterSchedule: {
     type: String,
     enum: [
       "Daily",
       "Every other day",
       "Twice a week",
-      "Semiweekly",
       "Weekly",
       "Biweekly",
+      "Monthly"
     ]
   },
+  
   lastWater: String,
+
+  imgName: String, //Name on cloudinary
+
+  imgPath: String  //Links to cloudinary
 
 });
 
