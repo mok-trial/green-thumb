@@ -1,4 +1,46 @@
+<style>
+    .confirm-plant-flex {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
 <p>confirm plant from database</p>
 
+{{!-- form action="/addPlant/{{plantId}}" metohd="POST" --}}
+<div class="confirm-plant-flex">
+    {{#with plant}}
+    <section class="plantInfo">
+        <h1>{{commonName}}</h1>
+        <h2>Scientific Name: {{scientificName}}</h2>
+        <img src="{{image}}" alt="">
+        <p><span>Watering: </span>{{watering}}</p>
+        <p><span>Light: </span>{{light}}</p>
+        <p><span>Soil: </span>{{soil}}</p>
+    </section>
+    {{/with}}
 
+
+    <section>
+        <form action="/addPlant/{{plantId}}" method="POST">
+            <label for="customName">Add a custom name: </label>
+            <input type="text" id="customName" name="customName">
+            <label for="watering">Watering Schedule: </label>
+            <select name="waterSchedule" id="" id="watering">
+                {{#each userPlant}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+
+            <label for="notes">Notes: </label>
+            <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
+            <button type="submit">Add a Plant</button>
+        </form>
+    </section>
+</div>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
