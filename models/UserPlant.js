@@ -7,11 +7,12 @@ const userPlantSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Plant"
   },
- /*  notes: String,
-  owner: {
+  notes: String,
+  /* owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
-  }, */   //Fairly certain not needed (not used on w5d2 lecture material - KS)
+  },   //Fairly certain not needed (not used on w5d2 lecture material - KS) */
+  
   waterSchedule: {
     type: String,
     enum: [
