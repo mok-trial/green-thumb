@@ -3,6 +3,7 @@ const router = express.Router();
 const Plant = require("../../models/Plant");
 const UserPlant = require("../../models/UserPlant");
 const User = require("../../models/User");
+const uploadCloud = require("../../config/cloudinary.js");
 const moment = require("moment")
 
 // middleware that checks if a user is logged in
@@ -54,17 +55,45 @@ router.get("/:id", loginCheck(), (req, res) => {
     });
 });
 
-router.post("/:plantId", (req, res) => {
-  const { customName, waterSchedule, notes } = req.body;
-  const plantInfo = req.params.plantId;
-  UserPlant.create({ customName, waterSchedule, notes, plantInfo })
-    .then((data) => {
-      console.log(`Success ${data} was added to the database`);
+router.post(
+  "/:plantId",
+  uploadCloud.single("photo"),
+  loginCheck(),
+  (req, res) => {
+    const { customName, waterSchedule, notes } = req.body;
+    const plantInfo = req.params.plantId;
 
-      res.redirect("/profile");
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
+    const userId = req.user._id;
+
+    UserPlant.create({
+      customName,
+      waterSchedule,
+      notes,
+      plantInfo,
+      imgName,
+      imgPath,
     })
-    .catch((err) => res.render("addPlant/addPlantFromDB"));
-});
+
+      .then((userPlant) => {
+        console.log("plant added");
+        User.updateOne(
+          { _id: userId },
+          { $push: { plantCollection: userPlant } }
+        ).catch((error) => {
+          console.log(error);
+        });
+      })
+
+      .then((data) => {
+        console.log(`Success ${data} was added to the database`);
+
+        res.redirect("/profile");
+      })
+      .catch((err) => res.render("addPlant/addPlantFromDB"));
+  }
+);
 
 //BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK!
 

@@ -27,20 +27,29 @@
 
 
     <section>
-        <form action="/addPlant/{{plantId}}" method="POST">
-            <label for="customName">Add a custom name: </label>
+        <form action="/addPlant/{{plantId}}" method="POST" enctype="multipart/form-data">
+
+            <label for="customName">Custom name: </label>
             <input type="text" id="customName" name="customName">
-            <label for="watering">Watering Schedule: </label>
-            <select name="waterSchedule" id="" id="watering">
+
+
+            <label for="schedule">Watering Schedule: </label>
+            <select name="waterSchedule" id="schedule">
                 {{#each userPlant}}
                 <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
 
+            <label>Add an Image</label>
+            <input type="file" name="photo">
+
             <label for="notes">Notes: </label>
             <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
-            <button type="submit">Add a Plant</button>
+
+            <button type="submit">Add Plant</button>
         </form>
     </section>
 </div>
+
+
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
