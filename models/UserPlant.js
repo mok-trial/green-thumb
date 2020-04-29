@@ -24,6 +24,7 @@ const userPlantSchema = new Schema({
       "Monthly"
     ]
   },
+  
   lastWater: String,
 
   imgName: String, //Name on cloudinary
