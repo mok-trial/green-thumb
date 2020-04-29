@@ -35,7 +35,6 @@ router.get('/', loginCheck(), (req, res) => {
   router.post("/", uploadCloud.single("photo"), loginCheck(),  (req, res, next) => {
 
     const {customName, waterSchedule, notes} = req.body;
-    console.log('test')
  
     const imgPath = req.file.url;
     const imgName = req.file.originalname;
