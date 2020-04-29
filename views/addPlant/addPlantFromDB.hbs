@@ -8,7 +8,10 @@
 {{/each}}
 <button type="button" onclick="showAll()">All</button>
 {{#each plants}}
-<p><a href="/addPlant/{{_id}}" style="display: none" class="plants" data-category="{{category}}">{{commonName}}</a></p>
+<p><a href="/addPlant/{{_id}}" style="display: none" class="plants" data-category="{{category}}">
+        {{commonName}}
+        <img src="{{image}}" alt="" height="200">
+    </a></p>
 {{/each}}
 
 <script>

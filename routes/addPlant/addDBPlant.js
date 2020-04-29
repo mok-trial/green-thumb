@@ -32,19 +32,33 @@ router.get("/", loginCheck(), (req, res) => {
 router.get("/:id", loginCheck(), (req, res) => {
   const user = req.user;
 
-  //   res.send(req.params.id);
   Plant.findById(req.params.id)
     .then((plant) => {
-      //   res.send(plant);
       const userPlant = UserPlant.schema.obj.waterSchedule.enum;
-      console.log(userPlant);
-      res.render("addPlant/ConfirmPlantFromDB", { plant, user, userPlant });
+      const plantId = req.params.id;
+      res.render("addPlant/ConfirmPlantFromDB", {
+        plant,
+        user,
+        userPlant,
+        plantId,
+      });
     })
     .catch((err) => {
       console.log(err);
-      // logs the error to the console
       next(err);
     });
+});
+
+router.post("/:plantId", (req, res) => {
+  const { customName, waterSchedule, notes } = req.body;
+  const plantInfo = req.params.plantId;
+  UserPlant.create({ customName, waterSchedule, notes, plantInfo })
+    .then((data) => {
+      console.log(`Success ${data} was added to the database`);
+
+      res.redirect("../dashboard/profile");
+    })
+    .catch((err) => res.render("addPlant/addPlantFromDB"));
 });
 
 //BELOW THIS LINE HAS NOT BEEN TESTED - VIEL GLÜCK!
