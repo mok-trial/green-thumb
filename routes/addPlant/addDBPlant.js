@@ -89,6 +89,7 @@ router.post(
             ).catch((error) => {
               console.log(error);
             });
+            return userPlant;
           })
 
           .then((data) => {
