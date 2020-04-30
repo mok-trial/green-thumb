@@ -31,8 +31,12 @@
 
             <label for="customName">Custom name: </label>
             <input type="text" id="customName" name="customName">
-
-
+            {{!--          Added by Karl - start
+ --}} {{#if message}}
+            <div class="error-message">{{message}}</div>
+            {{/if}}
+            {{!-- Added by Karl - end
+ --}}
             <label for="schedule">Watering Schedule: </label>
             <select name="waterSchedule" id="schedule">
                 {{#each userPlant}}

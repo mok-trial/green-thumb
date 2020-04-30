@@ -70,6 +70,28 @@ router.post(
     const { customName, waterSchedule, lastWater, notes } = req.body;
     const plantInfo = req.params.plantId;
 
+    //Added by Karl (start)
+
+    const user = req.user;
+    const today = moment().format("YYYY-MM-DD");
+    const startOfThisYear = moment().format("YYYY-01-01");
+
+    if (customName === "") {
+      res.render("addPlant/confirmPlantFromDB", {
+        plant,
+        user,
+        userPlant,
+        plantId,
+        today,
+        startOfThisYear,
+        message: "Custom name cannot be empty",
+      });
+
+      return;
+    }
+
+    //Added by Karl (end)
+
     Plant.findById(req.params.plantId)
       .then((plant) => {
         console.log(plant.image);
