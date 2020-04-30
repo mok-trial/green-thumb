@@ -39,7 +39,6 @@
     }
 </style>
 
-
 <a href="/">Home</a><br>
 <a href="/auth/logout">Logout</a><br>
 
@@ -50,24 +49,23 @@
             <a href="/addplant">Add a Plant</a>
 
 <div class="plants">
-
     
     <article class='plant'>
 
         {{#each userplants}}
         
-        <h3>Name: {{customName}}</h3>
+        <h3>Name: {{this._doc.customName}}</h3>
 
-        <p><a href="/plantdetail/{{_id}}">Plant Details</a></p>
+        <p><a href="/plantdetail/{{this._doc._id}}">Plant Details</a></p>
 
-        <img src={{imgPath}} alt="plant_img">
+        <img src={{this._doc.imgPath}} alt="plant_img">
 
 
-        <p>Water Schedule: {{waterSchedule}}</p>
+        <p>Water Schedule: {{this._doc.waterSchedule}}</p>
         
-        <form action="/profile/{{_id}}" method="POST">
+        <form action="/profile/{{this._doc._id}}" method="POST">
         <label for="lastWater"><b>Last Watered on:</b></label>
-        <input type="date" id="lastWater" name="lastWater" value={{lastWater}} max={{today}}>
+        <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max="new Date()">
         <button type="submit">Update</button>
         </form>
 
@@ -77,13 +75,4 @@
         {{/each}}
     </article>
 </div>
-
-
-
-
-        {{!-- <a href="plantDetail/{{_id}}">
-            <h2>{{customName}}</h2>
-        </a>
-        <img src="{{imgPath}}" alt="" height="300"> --}}
         
-        {{!-- <p><b>Next water on: </b>{{nextWater}}</p> --}}
