@@ -1,9 +1,13 @@
 <a href="/">Home</a>
 
-
 <p>This is the profile page?</p>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
 
-
+{{#each userplants}}
+<p>---</p>
+<p>Name is: {{{customName}}}</p>
+<p>Water Schedule is: {{waterSchedule}}</p>
+<p>Last watered on: {{lastWater}}</p>
+{{/each}}
 <a href="/addplant">Add a Plant</a>
 
