@@ -1,48 +1,55 @@
-<p>add custom plant</p>
-
-<a href="/addplant">Go back to plant list</a>
-
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+<link rel="stylesheet" href="/styles/form.css" />
 
 
-<form action="/customplant" method="POST" enctype="multipart/form-data">
+<header class="header">
+
+    <a href="/">
+        <p>/Root Directory</p>
+
+    </a>
+    <a href="/profile">Go to my collection</a>
+    <a href="/auth/logout">Logout</a>
+
+</header>
 
 
-<label for="name">Custom Name:</label>
-<input type="text" name="customName" id="name">
- {{#if message}}
-  <div class="error-message">{{message}}</div>
-  {{/if}}
-<br><br>
+<div class="wrapper">
+    <div class="inner">
+        <form action="/customplant" method="POST" enctype="multipart/form-data">
+            <label for="name">Custom Name:</label>
+            <input type="text" name="customName" id="name">
+            {{#if message}}
+            <div class="error-message">{{message}}</div>
+            {{/if}}
+            <br><br>
 
 
-<label for="schedule">Watering Schedule:</label>
-<select name="waterSchedule" id="schedule">
-<br><br>
+            <label for="schedule">Watering Schedule:</label>
+            <select name="waterSchedule" id="schedule">
+                <br><br>
 
 
-{{#each userPlant}}
-<option value="{{this}}">{{this}}</option>
-    {{/each}}
-</select>
-<br><br>
+                {{#each userPlant}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <br><br>
 
- <label for="lastWater">Last Watered on:</label>
-    <input type="date" id="lastWater" name="lastWater" value={{today}} min={{startOfThisYear}} max={{today}}>
-    <br><br>
-
-
-<label>Add an Image</label> 
-<input type="file" name="photo">
-<br><br>
-
-<label for="notes">Notes:</label>
-<textarea id="notes" name="notes" rows="4" cols="25"></textarea>
-<br><br>
-
-<button type="submit">Add Plant</button>
-
-</form>
+            <label for="lastWater">Last Watered on:</label>
+            <input type="date" id="lastWater" name="lastWater" value={{today}} min={{startOfThisYear}} max={{today}}>
+            <br><br>
 
 
+            <label>Add an Image</label>
+            <input type="file" name="photo">
+            <br><br>
 
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" rows="4" cols="25"></textarea>
+            <br><br>
+
+            <button type="submit">Add Plant</button>
+
+        </form>
+    </div>
+</div>

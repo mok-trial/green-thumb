@@ -8,9 +8,29 @@
         display: flex;
         flex-direction: column;
     }
+
+    .header {
+        display: flex;
+        background-color: #fffdf4;
+        color: #3a3b4a;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 3rem;
+        font-size: 1.5rem;
+    }
 </style>
 
-<p>confirm plant from database</p>
+
+<header class="header">
+
+    <a href="/">
+        <p>/Root Directory</p>
+
+    </a>
+    <a href="/profile">Go back to my collection</a>
+    <a href="/auth/logout">Logout</a>
+
+</header>
 
 {{!-- form action="/addPlant/{{plantId}}" metohd="POST" --}}
 <div class="confirm-plant-flex">
