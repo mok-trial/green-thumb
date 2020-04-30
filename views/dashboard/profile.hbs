@@ -43,16 +43,25 @@
 <a href="/">Home</a>
 <p>This is the profile page?</p>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
-<div class="plants">{{#each plants}}
 
+<div class="plants">
     <article class='plant'>
-        <a href="plantDetail/{{_id}}">
+        {{#each userplants}}
+        {{!-- <a href="plantDetail/{{_id}}">
             <h2>{{customName}}</h2>
-            <img src="{{imgPath}}" alt="" height="300">
-            <p><b>Last Watered: </b>{{lastWater}}</p>
         </a>
+        <img src="{{imgPath}}" alt="" height="300"> --}}
+        <p>Water Schedule is: {{waterSchedule}}</p>
+        
+        <form action="/customplant" method="POST" enctype="multipart/form-data">
+        <label for="lastWater"><b>Last Watered on:</b></label>
+        <input type="date" id="lastWater" name="lastWater" value={{lastWater}} max={{today}}>
+        <button type="submit">Update last watered date</button>
+        </form>
+
+        {{!-- <p><b>Next water on: </b>{{nextWater}}</p> --}}
         <button>Watered</button>
+        {{/each}}
     </article>
-    {{/each}}
 </div>
 <a href="/addplant">Add a Plant</a>
