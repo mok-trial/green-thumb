@@ -25,7 +25,7 @@ router.get("/:id", loginCheck(), (req, res) => {
     .then((plant) => {
       // console.log("user is", req.user._id);
 
-      res.render("dashboard/plantdetail", { user, plant });
+      res.render("dashboard/plantDetail", { user, plant });
     })
     .catch((err) => console.log(err));
 });
