@@ -5,7 +5,9 @@
 <h2>Categories</h2>
 {{#each categories}}
 <div class="category">
-    <button type="button" onclick="handleClick(`{{this}}`)">{{this}}</button>
+    <button type="button" onclick="handleClick(`{{this.name}}`)">{{this.name}} <img src="{{this.image}}"
+            alt="{{this.name}}">
+    </button>
 </div>
 {{/each}}
 <button type="button" onclick="showAll()">All</button>

@@ -23,7 +23,13 @@ router.get("/", loginCheck(), (req, res) => {
 
   Plant.find()
     .then((plants) => {
-      const categories = [...new Set(plants.map((plant) => plant.category))];
+      const uniqueCategories = [
+        ...new Set(plants.map((plant) => plant.category)),
+      ];
+      const categories = uniqueCategories.map((category) => ({
+        name: category,
+        image: plants.filter((plant) => plant.category === category)[0].image,
+      }));
       res.render("addPlant/addPlantFromDB", { plants, user, categories });
     })
     .catch((err) => {
