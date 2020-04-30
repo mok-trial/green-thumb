@@ -45,4 +45,25 @@ router.get('/', loginCheck(), (req, res) => {
     })
   });  
 
+
+
+  router.post("/:id",  (req, res, next) => {
+
+    const plantId = req.params.id;
+    const {lastWater } = req.body;
+    
+    UserPlant.findByIdAndUpdate(plantId, {lastWater: lastWater})
+
+    .then((plant) => {
+      console.log(`Last Water date updated to: ${plant.lastWater}`)
+      res.redirect("/profile")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+    })
+
+
+
 module.exports = router;
