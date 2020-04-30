@@ -1,9 +1,58 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .plants {
+        margin: 1em;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-gap: 20px;
+    }
+
+    .plant {
+        display: flex;
+        flex-flow: column;
+        margin: auto;
+        justify-content: center;
+    }
+
+    .plant>img {
+        order: -1;
+        align-self: center;
+        width: 100%;
+    }
+
+    .plant>a {
+        font-size: 1rem;
+    }
+
+    .plant>h2 {
+        text-align: center;
+    }
+
+    }
+</style>
+
+
 <a href="/">Home</a>
-
-
 <p>This is the profile page?</p>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+<div class="plants">{{#each plants}}
 
-
+    <article class='plant'>
+        <a href="plantDetail/{{_id}}">
+            <h2>{{customName}}</h2>
+            <img src="{{imgPath}}" alt="" height="300">
+            <p><b>Last Watered: </b>{{lastWater}}</p>
+        </a>
+        <button>Watered</button>
+    </article>
+    {{/each}}
+</div>
 <a href="/addplant">Add a Plant</a>
-
