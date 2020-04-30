@@ -1,8 +1,8 @@
 <h1>{{title}}</h1>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
 
-<a href="/about">About</a>
-
+{{!-- <a href="/about">About</a>
+ --}}
 
 {{#unless user}}
 <a href="/auth/signup">Signup</a>
@@ -12,8 +12,6 @@
 
 <a href="/profile">Go to your plants</a>
 
-{{!-- <a href="/plants/add">Add a plant</a>
-<a href="/plants">See plants</a> --}}
 <a href="/auth/logout">Logout</a>
 
 {{/unless}}

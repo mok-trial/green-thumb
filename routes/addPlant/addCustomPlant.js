@@ -25,8 +25,8 @@ router.get('/', loginCheck(), (req, res) => {
 
   const today = moment().format('YYYY-MM-DD')
   const startOfThisYear = moment().format('YYYY-01-01')
-    const user = req.user;
-    const userPlant = UserPlant.schema.obj.waterSchedule.enum;
+  const user = req.user;
+  const userPlant = UserPlant.schema.obj.waterSchedule.enum;
 
 
     res.render('addPlant/addPlantCustom', { user, userPlant, today, startOfThisYear} );
@@ -35,8 +35,18 @@ router.get('/', loginCheck(), (req, res) => {
 
 
   router.post("/", uploadCloud.single("photo"), loginCheck(),  (req, res, next) => {
+    const today = moment().format('YYYY-MM-DD')
+    const startOfThisYear = moment().format('YYYY-01-01')
+    const user = req.user;
+    const userPlant = UserPlant.schema.obj.waterSchedule.enum;
 
     const {customName, waterSchedule, notes, lastWater} = req.body;
+
+    if (customName === "") {
+      res.render("addPlant/addPlantCustom", {user, userPlant, today, startOfThisYear, message: "Custom name cannot be empty" });
+
+      return;
+    }
  
     const defaultUserImage = "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
     let imgPath = req.file ? req.file.url : defaultUserImage;
