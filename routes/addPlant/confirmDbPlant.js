@@ -19,14 +19,10 @@ const loginCheck = () => {
 
 
 router.get('/', loginCheck(), (req, res) => {
-
-
-
     const user = req.user;
-    res.render('addPlant/confirmPlantfromDB', { user: user} );
-
-
-  });
+    
+    res.render('addPlant/confirmPlantfromDB', { user: user } );
+});
 
 
   module.exports = router;

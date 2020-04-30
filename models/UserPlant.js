@@ -28,7 +28,10 @@ const userPlantSchema = new Schema({
   imgPath: {
     type: String,  //Links to cloudinary
     default: "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/icons8-plant-96_xbgilv.png"
-  }
+  },
+
+  lastWater: String
+
   });
 
 
