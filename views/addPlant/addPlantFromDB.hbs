@@ -19,6 +19,10 @@
         font-size: 1.5rem;
     }
 
+    .header p {
+        margin: 0px;
+    }
+
     .logout {
         display: flex;
         justify-content: space-between;
@@ -93,15 +97,20 @@
 
     .all {
         padding: 1em;
+        width: 20%;
         border: none;
         background-color: #041623;
         color: #fffdf4;
+
     }
 
     .addAndshow {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 2rem;
     }
+
+
 </style>
 
 
@@ -111,13 +120,15 @@
         <p>/Root Directory</p>
 
     </a>
-    <a href="/profile">Go to my collection</a>
+    <a href="/profile">Go back to plant collection</a>
     <a href="/auth/logout">Logout</a>
 
 </header>
 
 <section class="wrap">
     <h1 class="title">Categories</h1>
+    <a href="/customplant"><b>Add Custom Plant</b></a>
+
     <div class="categories">
         {{#each categories}}
         <div class="category">
@@ -131,7 +142,6 @@
 
     <div class="addAndshow">
         <button class="all" type=" button" onclick="showAll()">Show All Plants</button>
-        <a href="/customplant">Add Custom Plant</a>
     </div>
 
     <div class="plantsDB">
