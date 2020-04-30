@@ -1,35 +1,166 @@
-<p>add plant from database</p>
+<style>
+    body {
+        padding: 0;
+        margin: 0
+    }
 
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+    .wrap {
+        width: 80%;
+        margin: auto
+    }
 
-<h2>Categories</h2>
-{{#each categories}}
-<div class="category">
-    <button type="button" onclick="handleClick(`{{this.name}}`)">{{this.name}} <img src="{{this.image}}"
-            alt="{{this.name}}">
-    </button>
-</div>
-{{/each}}
-<button type="button" onclick="showAll()">All</button>
-{{#each plants}}
-<p><a href="/addPlant/{{_id}}" style="display: none" class="plants" data-category="{{category}}">
-        {{commonName}}
-        <img src="{{image}}" alt="" height="200">
-    </a></p>
-{{/each}}
-<a href="/customplant">Add Custom Plant</a>
-<a href="/">Home</a>
+    .header {
+        display: flex;
+        background-color: #fffdf4;
+        color: #3a3b4a;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 3rem;
+        font-size: 1.5rem;
+    }
+
+    .logout {
+        display: flex;
+        justify-content: space-between;
+        width: 8em
+    }
+
+    .title {
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        font-size: 3em;
+    }
+
+    .categories {
+        margin: 1em;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 20px;
+    }
+
+    .category {
+        display: flex;
+        flex-flow: column;
+        margin: auto;
+        justify-content: center;
+        min-height: 13em;
+        width: 13em;
+    }
+
+
+
+    .category>button {
+        padding: 1em;
+        background-color: rgba(255, 255, 255, 0.7);
+        font-weight: normal;
+        color: #3a3b4a;
+        opacity: 1;
+    }
+
+    .category img {
+        order: -1;
+        align-self: center;
+
+    }
+
+    .plantsDB {
+        margin: 1em;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 20px;
+    }
+
+    .plantDB {
+        display: flex;
+        flex-flow: column;
+        margin: auto;
+        justify-content: center;
+        min-height: 13em;
+        width: 13em;
+    }
+
+    .plantDB img {
+        order: -1;
+        align-self: center;
+        max-width: 100%;
+    }
+
+    .center {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .all {
+        padding: 1em;
+        border: none;
+        background-color: #041623;
+        color: #fffdf4;
+    }
+
+    .addAndshow {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+
+<header class="header">
+
+    <a href="/">
+        <p>/Root Directory</p>
+
+    </a>
+    <a href="/profile">Go to my collection</a>
+    <a href="/auth/logout">Logout</a>
+
+</header>
+
+<section class="wrap">
+    <h1 class="title">Add a plant</h1>
+    <h2>Choose from a category</h2>
+    <div class="categories">
+        {{#each categories}}
+        <div class="category">
+            <button type="button" onclick="handleClick(`{{this.name}}`)">
+                <img src="{{this.image}}" alt="{{this.name}}" height="100">
+                <h3>{{this.name}}</h3>
+            </button>
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="addAndshow">
+        <button class="all" type=" button" onclick="showAll()">Show All Plants</button>
+        <a href="/customplant">Add Custom Plant</a>
+    </div>
+
+    <div class="plantsDB">
+        {{#each plants}}
+        <article class="plantDB" data-category="{{category}}" style="display: none">
+            <a href="/addPlant/{{_id}}" class="center">
+                <p>{{commonName}}</p>
+                <img src="{{image}}" alt="" height="120">
+            </a>
+        </article>
+        {{/each}}
+    </div>
+
+</section>
+
+
 
 
 <script>
     const handleClick = (category) => {
-        const plants = Array.from(document.querySelectorAll(`.plants[data-category="${category}"]`))
-        const plantsToHide = Array.from(document.querySelectorAll(`.plants:not([data-category="${category}"])`))
+        const plants = Array.from(document.querySelectorAll(`.plantDB[data-category="${category}"]`))
+        const plantsToHide = Array.from(document.querySelectorAll(`.plantDB:not([data-category="${category}"])`))
+        console.log(plants)
         plants.forEach(plant => plant.style.display = "flex")
         plantsToHide.forEach(plant => plant.style.display = "none")
     }
     const showAll = () => {
-        const plants = Array.from(document.querySelectorAll(".plants"));
+        const plants = Array.from(document.querySelectorAll(".plantDB"));
         plants.forEach(plant => plant.style.display = "flex")
     }
 </script>

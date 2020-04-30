@@ -1,17 +1,51 @@
-<h1>{{title}}</h1>
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-image: url("./images/plant-background.png");
+        background-size: cover;
+    }
+
+    .title {
+        font-family: "Merriweather";
+        color: #fffdf4;
+        position: absolute;
+        left: 12vw;
+        top: 55vh;
+        font-size: 4em;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 3rem;
+        font-size: 1.5rem;
+    }
+
+    .logout {
+        display: flex;
+        justify-content: space-between;
+        width: 12em
+    }
+</style>
+
+<header class="header">
+
+    <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+    <div class="logout">
+        {{#unless user}}
+        <a href="/auth/signup">Signup</a>
+        <a href="/auth/login">Login</a>
+        {{else}}
+        <a href="/profile">Go to your plants</a>
+        <a href="/auth/logout">Logout</a>
+        {{/unless}}
+    </div>
+</header>
+
+<h1 class="title">/{{title}}</h1>
 
 {{!-- <a href="/about">About</a>
  --}}
-
-{{#unless user}}
-<a href="/auth/signup">Signup</a>
-<a href="/auth/login">Login</a>
-{{else}}
-
-
-<a href="/profile">Go to your plants</a>
-
-<a href="/auth/logout">Logout</a>
-
-{{/unless}}
