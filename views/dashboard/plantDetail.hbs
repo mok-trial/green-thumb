@@ -25,22 +25,26 @@
 <h2>{{scientificName}}</h2>
 {{/with}}
 
+
+{{#if plant.plantInfo.image}}
+<img src="{{plant.plantInfo.image}}" alt="" height="400">
+{{else}}
+<img src="{{plant.imgPath}}" alt="" height="400">
+{{/if}}
+
+
 <div class="plant-detail-flex">
     {{#with plant.plantInfo}}
     <section class="plantInfo">
         <h1>{{commonName}}</h1>
-        <h3>Scientific Name: {{scientificName}}</h2>
-            {{/with}}
-            {{#if plant.imgPath}}
-            <img src="{{plant.imgPath}}" alt="" height="400">
-            {{else}}
-            <img src="{{plant.plantInfo.image}}" alt="">
-            {{/if}}
+        <h3>Scientific Name: {{scientificName}}</h3>
 
-            <p><b>Watering: </b>{{plant.plantInfo.watering}}</p>
-            <p><b><span>Light: </b></span>{{plant.plantInfo.light}}</p>
-            <p><b><span>Soil: </b></span>{{plant.plantInfo.soil}}</p>
+
+        <p><b>Watering: </b>{{plant.plantInfo.watering}}</p>
+        <p><b><span>Light: </b></span>{{plant.plantInfo.light}}</p>
+        <p><b><span>Soil: </b></span>{{plant.plantInfo.soil}}</p>
     </section>
+    {{/with}}
 
 
     <section>
