@@ -39,9 +39,9 @@ router.get("/", loginCheck(), (req, res) => {
 
 router.get("/:id", loginCheck(), (req, res) => {
   const user = req.user;
-  const today = moment().format('YYYY-MM-DD')
-  const startOfThisYear = moment().format('YYYY-01-01')
-  
+  const today = moment().format("YYYY-MM-DD");
+  const startOfThisYear = moment().format("YYYY-01-01");
+
   Plant.findById(req.params.id)
     .then((plant) => {
       const userPlant = UserPlant.schema.obj.waterSchedule.enum;
@@ -52,7 +52,7 @@ router.get("/:id", loginCheck(), (req, res) => {
         userPlant,
         plantId,
         today,
-        startOfThisYear
+        startOfThisYear,
       });
     })
     .catch((err) => {
@@ -66,42 +66,46 @@ router.post(
   uploadCloud.single("photo"),
   loginCheck(),
   (req, res) => {
+    const userId = req.user._id;
     const { customName, waterSchedule, lastWater, notes } = req.body;
     const plantInfo = req.params.plantId;
 
-    const defaultUserImage = "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
-    let imgPath = req.file ? req.file.url : defaultUserImage;
-    let imgName = req.file ? req.file.originalname : 'default-image';
+    Plant.findById(req.params.plantId)
+      .then((plant) => {
+        console.log(plant.image);
 
- 
-    const userId = req.user._id;
+        let imgPath = req.file ? req.file.url : plant.image;
+        let imgName = req.file ? req.file.originalname : "database-image";
 
-    UserPlant.create({
-      customName,
-      waterSchedule,
-      notes,
-      plantInfo,
-      imgName,
-      imgPath,
-      lastWater
-    })
+        UserPlant.create({
+          customName,
+          waterSchedule,
+          notes,
+          plantInfo,
+          imgName,
+          imgPath,
+          lastWater,
+        })
 
-      .then((userPlant) => {
-        console.log("plant added");
-        User.updateOne(
-          { _id: userId },
-          { $push: { plantCollection: userPlant } }
-        ).catch((error) => {
-          console.log(error);
-        });
+          .then((userPlant) => {
+            console.log("plant added");
+            User.updateOne(
+              { _id: userId },
+              { $push: { plantCollection: userPlant } }
+            ).catch((error) => {
+              console.log(error);
+            });
+            return userPlant;
+          })
+
+          .then((data) => {
+            console.log(`Success ${data} was added to the database`);
+
+            res.redirect("/profile");
+          })
+          .catch((err) => res.render("addPlant/addPlantFromDB"));
       })
-
-      .then((data) => {
-        console.log(`Success ${data} was added to the database`);
-
-        res.redirect("/profile");
-      })
-      .catch((err) => res.render("addPlant/addPlantFromDB"));
+      .catch((err) => console.log(err));
   }
 );
 
