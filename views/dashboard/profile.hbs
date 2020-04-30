@@ -12,7 +12,7 @@
 
 <main>
     <h2>Your Plant Collection</h2>
-    <a href="/addplant">Add a Plant</a>
+    <a href="/addplant" class = "addplant"><b>Add a Plant</b></a>
 
     <div class="plants">
         {{#each userplants}}
@@ -20,7 +20,7 @@
 
             <a href="/plantdetail/{{this._doc._id}}">
                 <div class="plant-image" style="background-image: url({{this._doc.imgPath}});">
-                    <p class="plantdetails">plant details</p>
+                    <p class="plantdetails">Plant Details</p>
                 </div>
             </a>
             <h3 class="">{{this._doc.customName}}</h3>
@@ -29,9 +29,11 @@
             <p>Water Schedule: {{this._doc.waterSchedule}}</p>
             <p>Next Water: {{nextWater}}</p>
             <form action="/profile/{{this._doc._id}}" method="POST">
-                <label for="lastWater">Last Watered:</label>
+                <label for="lastWater" class>Last Watered:</label>
                 <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
+                <div>
                 <button type="submit">Update</button>
+                </div>
             </form>
 
 

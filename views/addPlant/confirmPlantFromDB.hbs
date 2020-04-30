@@ -1,23 +1,114 @@
 <style>
-    .confirm-plant-flex {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
 
-    form {
-        display: flex;
-        flex-direction: column;
-    }
+    /* Removes the clear button from date inputs */
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
 
-    .header {
-        display: flex;
-        background-color: #fffdf4;
-        color: #3a3b4a;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.3rem 3rem;
-        font-size: 1.5rem;
-    }
+/* Removes the spin button */
+input[type="date"]::-webkit-inner-spin-button { 
+  display: none;
+}
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #2c3e50;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #95a5a6;
+  font-family: "Helvetica", arial, sans-serif;
+  font-size: 14px;
+  border:1px solid #ecf0f1;
+  background:#ecf0f1;
+  padding:5px;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+input[type="date"], focus {
+  color: #95a5a6;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.confirm-plant-flex button {
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: 0;
+  margin: 20px 0px;
+  width: 40%;
+}
+
+ .confirm-plant-flex button {
+  background: #8142f5;
+  border: 1px solid #8142f5;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 5px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.3s ease background;
+}
+
+   .confirm-plant-flex button:hover {
+  background: #fff;
+  color: #8142f5;
+  transition: 0.3s ease background;
+}
+
+
+
+
+
+.confirm-plant-flex {
+    display: flex;
+    padding: 4rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    background-color: #fffdf4;
+    color: #3a3b4a;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 3rem;
+    font-size: 1.5rem;
+}
+
+.header p {
+    padding:0px;
+    margin: 0px;
+}
+
+.plantDB {
+    width: 20vw;
+    margin-right: 10rem; 
+}
+
+.plantInfo {
+    max-width: 60vw;
+}
+
+.plantDB label {
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
 </style>
 
 
@@ -32,31 +123,21 @@
 
 </header>
 
-{{!-- form action="/addPlant/{{plantId}}" metohd="POST" --}}
+
+
 <div class="confirm-plant-flex">
-    {{#with plant}}
-    <section class="plantInfo">
-        <h1>{{commonName}}</h1>
-        <h2>Scientific Name: {{scientificName}}</h2>
-        <img src="{{image}}" alt="" height="500">
-        <p><b>Watering: </b>{{watering}}</p>
-        <p><b>Light: </b>{{light}}</p>
-        <p><b>Soil: </b>{{soil}}</p>
-    </section>
-    {{/with}}
 
 
-    <section>
+
+    <section class = "plantDB">
         <form action="/addPlant/{{plantId}}" method="POST" enctype="multipart/form-data">
 
-            <label for="customName">Custom name: </label>
+            <label for="customName">Plant Nickname: </label>
             <input type="text" id="customName" name="customName">
-            {{!--          Added by Karl - start
- --}} {{#if message}}
+            {{#if message}}
             <div class="error-message">{{message}}</div>
             {{/if}}
-            {{!-- Added by Karl - end
- --}}
+           
             <label for="schedule">Watering Schedule: </label>
             <select name="waterSchedule" id="schedule">
                 {{#each userPlant}}
@@ -67,8 +148,9 @@
             <label for="lastWater">Last Watered on:</label>
             <input type="date" id="lastWater" name="lastWater" value={{today}} min={{startOfThisYear}} max={{today}}>
 
-            <label>Add an Image</label>
+            <label class="custom-file-upload">Upload an image
             <input type="file" name="photo">
+            </label>
 
             <label for="notes">Notes: </label>
             <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
@@ -76,4 +158,15 @@
             <button type="submit">Add Plant</button>
         </form>
     </section>
+
+    {{#with plant}}
+    <section class="plantInfo">
+        <h1>Common Name: {{commonName}}</h1>
+        <h2>Scientific Name: {{scientificName}}</h2>
+        <img src="{{image}}" alt="" height="500">
+        <p><b>Watering: </b>{{watering}}</p>
+        <p><b>Light: </b>{{light}}</p>
+        <p><b>Soil: </b>{{soil}}</p>
+    </section>
+    {{/with}}
 </div>
