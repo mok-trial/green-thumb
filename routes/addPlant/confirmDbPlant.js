@@ -21,7 +21,7 @@ const loginCheck = () => {
 router.get('/', loginCheck(), (req, res) => {
     const user = req.user;
     
-    res.render('addPlant/confirmPlantfromDB', { user: user, today, startOfThisYear } );
+    res.render('addPlant/confirmPlantfromDB', { user: user } );
 });
 
 

@@ -40,6 +40,9 @@
                 {{/each}}
             </select>
 
+            <label for="lastWater">Last Watered on:</label>
+            <input type="date" id="lastWater" name="lastWater" value={{today}} min={{startOfThisYear}} max={{today}}>
+
             <label>Add an Image</label>
             <input type="file" name="photo">
 

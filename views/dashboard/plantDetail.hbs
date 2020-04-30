@@ -8,6 +8,10 @@
         display: flex;
         flex-direction: column;
     }
+
+    li {
+        list-style-type: none;
+    }
 </style>
 <p>plant details</p>
 
@@ -22,38 +26,51 @@
 {{/with}}
 
 
-
+<img src="{{plant.imgPath}}" alt="" height="400">
 
 <div class="plant-detail-flex">
     {{#with plant.plantInfo}}
     <section class="plantInfo">
         <h1>{{commonName}}</h1>
-        <h3>Scientific Name: {{scientificName}}</h2>
-            <img src="{{image}}" alt="">
-            <p><b>Watering: </b>{{watering}}</p>
-            <p><b><span>Light: </b></span>{{light}}</p>
-            <p></b><span>Soil: </b></span>{{soil}}</p>
+        <h3>Scientific Name: {{scientificName}}</h3>
+
+
+        <p><b>Watering: </b>{{plant.plantInfo.watering}}</p>
+        <p><b><span>Light: </b></span>{{plant.plantInfo.light}}</p>
+        <p><b><span>Soil: </b></span>{{plant.plantInfo.soil}}</p>
     </section>
     {{/with}}
 
 
     <section>
-        <div>
-            <h3 for="customName">Custom name: </h3>
-            <p>{{plant.customName}}</p>
+        <ul>
+
+            <li>
+                <p><b>Custom name: </b>{{plant.customName}}</p>
+            </li>
+            <li>
+                <p><b>Watering Schedule: </b>{{plant.waterSchedule}}</p>
+            </li>
+            <li>
+                {{#if plant.notes}}
+                <p><b>Notes: </b>{{plant.notes}}</p>
+                {{/if}}
+            </li>
+            {{#if plant.lastWater}}
+            <li>
+                <p><b>Last Watered:</b> {{plant.lastWater}}</p>
+            </li>
+            {{/if}}
+            {{!-- <a href="/celebrities/{{_id}}/edit">Edit</a> --}}
+            <form action="/plantDetail/{{plant._id}}/delete" method="post"><button>Delete</button></form>
             {{!--             
 
-            <label for="watering">Watering Schedule: </label>
-            <select name="waterSchedule" id="" id="watering">
-                {{#each userPlant}}
-                <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
+            
 
             <label for="notes">Notes: </label>
             <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
             <button type="submit">Add a Plant</button> --}}
-        </div>
+        </ul>
     </section>
 </div>
 
