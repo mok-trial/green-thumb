@@ -37,7 +37,8 @@ router.get('/', loginCheck(), (req, res) => {
     const userplants = allUserplants.map(userplant => {
       const numberOfDaysForWateringRoutine = mapwaterScheduleToNumOfDays(userplant.waterSchedule)
       const nextWater = moment(userplant.lastWater).add(numberOfDaysForWateringRoutine, 'days').format('YYYY-MM-DD')
-      return {...userplant, nextWater}
+      const today = moment().format('YYYY-MM-DD')
+      return {...userplant, nextWater, today}
     })
     res.render("dashboard/profile", { user, userplants })
   })

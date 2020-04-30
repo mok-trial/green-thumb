@@ -65,7 +65,7 @@
         
         <form action="/profile/{{this._doc._id}}" method="POST">
         <label for="lastWater"><b>Last Watered on:</b></label>
-        <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max="new Date()">
+        <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
         <button type="submit">Update</button>
         </form>
 
