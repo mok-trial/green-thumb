@@ -4,24 +4,43 @@
         padding: 0;
     }
 
+    .header {
+        display: flex;
+        background-color: #fffdf4;
+        color: #3a3b4a;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 3rem;
+        font-size: 1.5rem;
+    }
+
+    main {
+        width: 80%;
+        margin: auto
+    }
+
     .plants {
         margin: 1em;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-rows: repeat(auto-fit, 1fr);
         grid-gap: 20px;
     }
 
     .plant {
+        padding: 1em;
         display: flex;
         flex-flow: column;
         margin: auto;
         justify-content: center;
     }
 
-    .plant>img {
+    .plant-image {
         align-self: center;
-        width: 100%;
-        width: 5rem;
+        width: 10rem;
+        max-width: 100%;
+        height: 10rem;
+        background-size: cover;
     }
 
     .plant>a {
@@ -33,40 +52,46 @@
     }
 </style>
 
-<a href="/">Home</a><br>
-<a href="/auth/logout">Logout</a><br>
+<header class="header">
 
+    <a href="/">
+        <p>/Root Directory</p>
 
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
+    </a>
+    <a href="/auth/logout">Logout</a>
 
-<h2>Your Plant Collection</h2>
-            <a href="/addplant">Add a Plant</a>
+</header>
 
-<div class="plants">
-    
-    <article class='plant'>
+<main>
+    <h2>Your Plant Collection</h2>
+    <a href="/addplant">Add a Plant</a>
+
+    <div class="plants">
+
 
         {{#each userplants}}
-        
-        <h3>Name: {{this._doc.customName}}</h3>
+        <article class="plant">
 
-        <p><a href="/plantdetail/{{this._doc._id}}">Plant Details</a></p>
+            <h3>{{this._doc.customName}}</h3>
 
-        <img src={{this._doc.imgPath}} alt="plant_img">
+            <p><a href="/plantdetail/{{this._doc._id}}">Plant Details</a></p>
 
-
-        <p>Water Schedule: {{this._doc.waterSchedule}}</p>
-        
-        <form action="/profile/{{this._doc._id}}" method="POST">
-        <label for="lastWater"><b>Last Watered on:</b></label>
-        <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
-        <button type="submit">Update</button>
-        </form>
-
-        <p>Next Water: {{nextWater}}</p>
+            <div class="plant-image" style="background-image: url({{this._doc.imgPath}});"></div>
 
 
+            <p>Water Schedule: {{this._doc.waterSchedule}}</p>
+
+            <form action="/profile/{{this._doc._id}}" method="POST">
+                <label for="lastWater"><b>Last Watered on:</b></label>
+                <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
+                <button type="submit">Update</button>
+            </form>
+
+            <p>Next Water: {{nextWater}}</p>
+
+
+        </article>
         {{/each}}
-    </article>
-</div>
-        
+
+    </div>
+</main>
