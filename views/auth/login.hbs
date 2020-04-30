@@ -1,9 +1,79 @@
+<style>
+
+ body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+
+        background-image: url("../images/plant-background.png");
+        background-size: cover;
+    }
+
+.login {
+ 
+
+  color: #3a3b4a;
+  
+
+}
+
+.login > div {
+  display: flex;
+	justify-content: center;
+
+}
+
+.login > div > div {
+  color: #3a3b4a;
+  display: flex;
+  flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+  background-color: rgba(215, 215, 215, 0.8);
+  width: 40%;
+  margin-top: 5rem;
+  padding-bottom: 4rem;
+
+}
+
+.login h1 {
+  font-size: 3rem;
+  padding-top: 2rem;
+  margin-bottom: 1rem;
+
+}
+
+
+
+.login a {
+    font-size: 1.2rem;
+
+}
+
+.login > a {
+  font-size: 1.5rem;
+  padding-left: 1.5rem;
+  
+}
+
+</style>
+
+<div class ="login">
+<a href="/" class = "loginhome">Home</a>
+
+<div>
+
+<div>
+
+  <h1>LOG IN</h1>
+
 <form id="form" action="/auth/login" method="POST">
 
-  <label for="username">Username</label><br />
+  <label for="username"><b>Username</b></label><br />
   <input type="text" name="username" />
 
-  <label for="password">Password</label><br />
+  <label for="password"><b>Password</b></label><br />
   <input type="password" name="password" />
 
   {{#if errorMessage}}
@@ -13,6 +83,9 @@
   <button type="submit">Log in</button>
 </form>
 
-<a href="/auth/signup">Need an account? Click here to sign up!</a>
+<a href="/auth/signup"><b>Need an account? Click here to sign up!</b></a>
 
-<a href="/">Home</a>
+</div>
+</div>
+
+</div>

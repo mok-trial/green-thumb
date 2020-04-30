@@ -1,82 +1,159 @@
 <style>
-    .plant-detail-flex {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+
+.plantdetails button {
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: 0;
+  padding: 4px;
+  width: 40%;
+  margin-bottom: 20px;
+}
+
+ .plantdetails button {
+  background: #43a3e6;
+  border: 1px solid #43a3e6;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 5px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.3s ease background;
+}
+
+ .plantdetails  button:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: 0.3s ease background;
+}
+
+    .plantdetails {
+        padding: 2rem;
     }
 
-    form {
+    .plantdetails form {
         display: flex;
         flex-direction: column;
     }
 
-    li {
+    .plantdetails li {
         list-style-type: none;
     }
+
+    .plantdetails > div {
+        display: flex;
+        flex-wrap: wrap;
+	    align-items: center;
+    }
+
+    .plantdetails img {
+        width: 15rem;
+        height: auto;
+    }
+
+    .plantdetails nav {
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 2rem;
+
+
+    }
+
+    .databaseinfo {
+        width: 50vw;
+    }
+
+    .plantdetails aside {
+    display: flex;
+    flex-direction: column;
+    padding-right: 7rem;
+    max-width: 30vw;
+
+    }
+
+     .plantdetails aside > div {
+         justify-content: center;
+	align-items: center;
+
+     }
+
+
+    .detailimage {
+        display: flex;
+        justify-content: center;
+	    align-items: center;
+    }
+
 </style>
-<p>plant details</p>
-
-<a href="/profile">Back</a>
-
-{{#with plant}}
-<h1>{{customName}}</h1>
-{{/with}}
-
-{{#with plant.plantInfo}}
-<h2>{{scientificName}}</h2>
-{{/with}}
 
 
-<img src="{{plant.imgPath}}" alt="" height="400">
 
-<div class="plant-detail-flex">
-    {{#with plant.plantInfo}}
-    <section class="plantInfo">
-        <h1>{{commonName}}</h1>
-        <h3>Scientific Name: {{scientificName}}</h3>
+<div class = "plantdetails">
+    <nav>
+        <a href="/profile">Back to Plant Collection</a>
+        <a href="/auth/logout">Logout</a>
+    </nav>
 
+    <h1>Plant Details</h1>
 
-        <p><b>Watering: </b>{{watering}}</p>
-        <p><b><span>Light: </b></span>{{light}}</p>
-        <p><b><span>Soil: </b></span>{{soil}}</p>
-    </section>
+    {{#with plant}}
+
+    <h2>Custom Name: {{customName}}</h2>
+
     {{/with}}
 
+    <div>
+        
 
-    <section>
-        <ul>
 
-            <li>
-                <p><b>Custom name: </b>{{plant.customName}}</p>
-            </li>
-            <li>
-                <p><b>Watering Schedule: </b>{{plant.waterSchedule}}</p>
-            </li>
-            <li>
-                {{#if plant.notes}}
-                <p><b>Notes: </b>{{plant.notes}}</p>
-                {{/if}}
-            </li>
-            {{#if plant.lastWater}}
-            <li>
-                <p><b>Last Watered:</b> {{plant.lastWater}}</p>
-            </li>
-            {{/if}}
-            {{!-- <a href="/celebrities/{{_id}}/edit">Edit</a> --}}
-            <form action="/plantDetail/{{plant._id}}/delete" method="post"><button>Delete</button></form>
-            {{!--             
-
+            <aside>
+                    <div class="detailimage">
+                    <img src="{{plant.imgPath}}" alt="" height="400">
+                    </div>
+                    <div>
+                <ul>
+                    <li>
+                        <p><b>Watering Schedule: </b>{{plant.waterSchedule}}</p>
+                    </li>
+                    <li>
+                        {{#if plant.notes}}
+                        <p><b>Notes: </b>{{plant.notes}}</p>
+                        {{/if}}
+                    </li>
+                    {{#if plant.lastWater}}
+                    <li>
+                        <p><b>Last Watered:</b> {{plant.lastWater}}</p>
+                    </li>
+                    {{/if}}
+                    
+                    <form action="/plantDetail/{{plant._id}}/delete" method="post"><button>Delete Plant</button></form>
             
+                </ul>
+                </div>
+            </aside>
 
-            <label for="notes">Notes: </label>
-            <textarea name="notes" style="height: 10rem" type="text" id="notes"></textarea>
-            <button type="submit">Add a Plant</button> --}}
-        </ul>
-    </section>
+             <div class = "databaseinfo">
+         
+
+
+            {{#with plant.plantInfo}}
+            <section>
+                <h2>Common Name: {{commonName}}</h2>
+                <h2>Scientific Name: {{scientificName}}</h2>
+
+
+                <p><b>Watering: </b>{{watering}}</p>
+                <p><b><span>Light: </b></span>{{light}}</p>
+                <p><b><span>Soil: </b></span>{{soil}}</p>
+            </section>
+            {{/with}}
+
+         </div>
+
+    </div>
+
+
 </div>
-
-
-
-
-
-
-<p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
