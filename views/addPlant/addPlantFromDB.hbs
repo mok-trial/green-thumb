@@ -19,6 +19,12 @@
         font-size: 1.5rem;
     }
 
+    .logout {
+        display: flex;
+        justify-content: space-between;
+        width: 8em
+    }
+
     .title {
         font-family: 'Nunito', sans-serif;
         font-weight: 600;
@@ -39,15 +45,15 @@
         justify-content: center;
         min-height: 13em;
         width: 13em;
-
-
     }
+
+
 
     .category>button {
         padding: 1em;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.7);
         font-weight: normal;
-        color: #a1a1a1;
+        color: #3a3b4a;
         opacity: 1;
     }
 
@@ -76,17 +82,40 @@
     .plantDB img {
         order: -1;
         align-self: center;
+        max-width: 100%;
+    }
+
+    .center {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .all {
+        padding: 1em;
+        border: none;
+        background-color: #041623;
+        color: #fffdf4;
+    }
+
+    .addAndshow {
+        display: flex;
+        flex-direction: column;
     }
 </style>
+
+
 <header class="header">
     <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
-    <a href="/">Home</a>
-
+    <div class="logout">
+        <a href="/">Home</a>
+        <a href="/auth/logout">Logout</a>
+    </div>
 </header>
 
 <section class="wrap">
-    <a href="/customplant">Add Custom Plant</a>
-    <h1 class="title">Categories</h1>
+    <h1 class="title">Add a plant</h1>
+    <h2>Choose from a category</h2>
     <div class="categories">
         {{#each categories}}
         <div class="category">
@@ -98,14 +127,17 @@
         {{/each}}
     </div>
 
-    <button type="button" onclick="showAll()">All</button>
+    <div class="addAndshow">
+        <button class="all" type=" button" onclick="showAll()">Show All Plants</button>
+        <a href="/customplant">Add Custom Plant</a>
+    </div>
 
     <div class="plantsDB">
         {{#each plants}}
         <article class="plantDB" data-category="{{category}}" style="display: none">
-            <a href="/addPlant/{{_id}}">
+            <a href="/addPlant/{{_id}}" class="center">
                 <p>{{commonName}}</p>
-                <img src="{{image}}" alt="" height="100">
+                <img src="{{image}}" alt="" height="120">
             </a>
         </article>
         {{/each}}
