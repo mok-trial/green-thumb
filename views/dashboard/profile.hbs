@@ -43,16 +43,17 @@
 <a href="/">Home</a>
 <p>This is the profile page?</p>
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
-<div class="plants">{{#each plants}}
-
+<div class="plants">{{#each userplants}}
     <article class='plant'>
-        <a href="plantDetail/{{_id}}">
-            <h2>{{customName}}</h2>
-            <img src="{{imgPath}}" alt="" height="300">
-            <p><b>Last Watered: </b>{{lastWater}}</p>
-        </a>
-        <button>Watered</button>
-    </article>
+    <a href="plantDetail/{{_id}}"></a>
+    {{#each userplants}}
+    <h2>{{customName}}</h2>
+    <img src="{{imgPath}}" alt="" height="300">
+    <p>Water Schedule is: {{waterSchedule}}</p>
+    <p><b>Last Watered on: </b>{{lastWater}}</p>
+    {{/each}}
+    <button>Watered</button>
+</article>
     {{/each}}
 </div>
 <a href="/addplant">Add a Plant</a>
