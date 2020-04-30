@@ -4,6 +4,16 @@
         padding: 0;
     }
 
+    .header {
+        display: flex;
+        background-color: #fffdf4;
+        color: #3a3b4a;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 3rem;
+        font-size: 1.5rem;
+    }
+
     .plants {
         margin: 1em;
         display: grid;
@@ -32,22 +42,27 @@
         text-align: center;
     }
 </style>
+<header class="header">
 
-<a href="/">Home</a><br>
-<a href="/auth/logout">Logout</a><br>
+    <a href="/">
+        <p>/Root Directory</p>
 
+    </a>
+    <a href="/auth/logout">Logout</a>
+
+</header>
 
 <p>Welcome {{#if user}}{{user.username}}{{/if}} ❤️</p>
 
 <h2>Your Plant Collection</h2>
-            <a href="/addplant">Add a Plant</a>
+<a href="/addplant">Add a Plant</a>
 
 <div class="plants">
-    
+
     <article class='plant'>
 
         {{#each userplants}}
-        
+
         <h3>Name: {{this._doc.customName}}</h3>
 
         <p><a href="/plantdetail/{{this._doc._id}}">Plant Details</a></p>
@@ -56,11 +71,11 @@
 
 
         <p>Water Schedule: {{this._doc.waterSchedule}}</p>
-        
+
         <form action="/profile/{{this._doc._id}}" method="POST">
-        <label for="lastWater"><b>Last Watered on:</b></label>
-        <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
-        <button type="submit">Update</button>
+            <label for="lastWater"><b>Last Watered on:</b></label>
+            <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
+            <button type="submit">Update</button>
         </form>
 
         <p>Next Water: {{nextWater}}</p>
@@ -69,4 +84,3 @@
         {{/each}}
     </article>
 </div>
-        
