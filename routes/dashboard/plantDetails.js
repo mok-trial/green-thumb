@@ -39,7 +39,7 @@ router.post("/:id/delete", loginCheck(), (req, res) => {
     .then(() => {
       UserPlant.deleteOne({ _id: plantId })
         .then(() => {
-          res.redirect("/");
+          res.redirect("/profile");
         })
         .catch((err) => console.log(err));
     })
