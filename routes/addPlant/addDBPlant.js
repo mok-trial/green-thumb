@@ -72,7 +72,7 @@ router.post(
 
     //Added by Karl (start)
 
-    const user = req.user;
+/*     const user = req.user;
     const today = moment().format("YYYY-MM-DD");
     const startOfThisYear = moment().format("YYYY-01-01");
 
@@ -88,7 +88,7 @@ router.post(
       });
 
       return;
-    }
+    } */
 
     //Added by Karl (end)
 
