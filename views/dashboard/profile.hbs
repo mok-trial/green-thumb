@@ -12,7 +12,7 @@
 
 <main>
     <h2>Your Plant Collection</h2>
-    <a href="/addplant" class = "addplant"><b>Add a Plant</b></a>
+    <a href="/addplant" class="addplant"><b>Add a Plant</b></a>
 
     <div class="plants">
         {{#each userplants}}
@@ -30,9 +30,11 @@
             <p>Next Water: {{nextWater}}</p>
             <form action="/profile/{{this._doc._id}}" method="POST">
                 <label for="lastWater" class>Last Watered:</label>
-                <input type="date" id="lastWater" name="lastWater" value={{this._doc.lastWater}} max={{today}}>
+                <input type="date" id="lastWater" name="lastWater" data-id="{{this._doc._id}}"
+                    data-value="{{this._doc.lastWater}}" value="{{this._doc.lastWater}}" max="{{today}}"
+                    onchange="handleChange(`{{this._doc._id}}`)">
                 <div>
-                <button type="submit">Update</button>
+                    <button type="submit" data-id="{{this._doc._id}}" style="visibility: hidden">Update</button>
                 </div>
             </form>
 
@@ -41,3 +43,19 @@
         {{/each}}
     </div>
 </main>
+
+<script>
+    function handleChange(id) {
+        const date = document.querySelector(`input[data-id="${id}"]`)
+        const updateButton = document.querySelector(`button[data-id="${id}"]`)
+        console.log(date)
+        console.log(date.value)
+        if (date.value !== date.dataset.value) {
+            updateButton.style.visibility = "visible"
+        }
+        else {
+            updateButton.style.visibility = "hidden"
+
+        }
+    }
+</script>
