@@ -1,91 +1,102 @@
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 
- body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
+    background-image: url("../images/plant-background.png");
+    background-size: cover;
+  }
 
-        background-image: url("../images/plant-background.png");
-        background-size: cover;
-    }
+  .header {
+    display: flex;
+    color: #3a3b4a;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 3rem;
+    font-size: 1.5rem;
+  }
 
-.login {
- 
+  .login {
+    color: #3a3b4a;
+  }
 
-  color: #3a3b4a;
-  
+  .login>div {
+    display: flex;
+    justify-content: center;
 
-}
+  }
 
-.login > div {
-  display: flex;
-	justify-content: center;
+  .login>div>div {
+    color: #3a3b4a;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(215, 215, 215, 0.8);
+    width: 40%;
+    margin-top: 5rem;
+    padding-bottom: 4rem;
 
-}
+  }
 
-.login > div > div {
-  color: #3a3b4a;
-  display: flex;
-  flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-  background-color: rgba(215, 215, 215, 0.8);
-  width: 40%;
-  margin-top: 5rem;
-  padding-bottom: 4rem;
+  .login h1 {
+    font-size: 3rem;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
 
-}
+  }
 
-.login h1 {
-  font-size: 3rem;
-  padding-top: 2rem;
-  margin-bottom: 1rem;
-
-}
-
-
-
-.login a {
+  .login a {
     font-size: 1.2rem;
 
-}
+  }
 
-.login > a {
-  font-size: 1.5rem;
-  padding-left: 1.5rem;
-  
-}
+  .login>a {
+    font-size: 1.5rem;
+    padding-left: 1.5rem;
 
+  }
 </style>
 
-<div class ="login">
-<a href="/" class = "loginhome">Home</a>
 
-<div>
+<header class="header">
 
-<div>
+  <a href="/">
+    <p>/Root Directory</p>
 
-  <h1>LOG IN</h1>
+  </a>
+  <a href="/auth/signup">Signup</a>
 
-<form id="form" action="/auth/login" method="POST">
+</header>
 
-  <label for="username"><b>Username</b></label><br />
-  <input type="text" name="username" />
+<div class="login">
 
-  <label for="password"><b>Password</b></label><br />
-  <input type="password" name="password" />
+  <div>
 
-  {{#if errorMessage}}
-    <div class="error-message">{{errorMessage}}</div>
-  {{/if}}
+    <div>
 
-  <button type="submit">Log in</button>
-</form>
+      <h1>LOG IN</h1>
 
-<a href="/auth/signup"><b>Need an account? Click here to sign up!</b></a>
+      <form id="form" action="/auth/login" method="POST">
 
-</div>
-</div>
+        <label for="username"><b>Username</b></label><br />
+        <input type="text" name="username" />
+
+        <label for="password"><b>Password</b></label><br />
+        <input type="password" name="password" />
+
+        {{#if errorMessage}}
+        <div class="error-message">{{errorMessage}}</div>
+        {{/if}}
+
+        <button type="submit">Log in</button>
+      </form>
+
+      <a href="/auth/signup"><b>Need an account? Click here to sign up!</b></a>
+
+    </div>
+  </div>
 
 </div>
