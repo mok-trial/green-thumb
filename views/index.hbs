@@ -8,12 +8,14 @@
     }
 
     .title {
-        font-family: "Merriweather";
         color: #fffdf4;
         position: absolute;
         left: 12vw;
-        top: 55vh;
-        font-size: 4em;
+        top: 50vh;
+        display: flex;
+        flex-direction: column;
+        
+        
     }
 
     .header {
@@ -25,10 +27,30 @@
         font-weight: bolder;
     }
 
+    .title h1 {
+        font-size: 6em;
+        font-family: "Merriweather";
+
+    }
 
 
     .logout > a {
         padding:  0rem 3rem;
+    }
+
+    .title h3 {
+        font-size: 2.5rem;
+        padding: 0px;
+        padding-bottom: 1rem;
+        margin: 0px;
+
+    }
+
+    .title h4 {
+        font-size: 1.5rem;
+        padding: 0px;
+        margin: 0px;
+
     }
 
 </style>
@@ -47,7 +69,21 @@
     </div>
 </header>
 
-<h1 class="title">/{{title}}</h1>
+<div class="title">
+    <div>
+    <h1>/{{title}}</h1>
+    </div>
+    <div>
+    <h3>Love your plants more</h3>
+    <h4>Find essential plant care tips</h4>
+    <h4>Always know when to water</h4>
+   
+    </div>
+
+</div>
+
+
+
 
 {{!-- <a href="/about">About</a>
  --}}
