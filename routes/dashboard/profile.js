@@ -38,8 +38,9 @@ router.get('/', loginCheck(), (req, res) => {
       const numberOfDaysForWateringRoutine = mapwaterScheduleToNumOfDays(userplant.waterSchedule)
       const nextWaterDate = moment(userplant.lastWater).add(numberOfDaysForWateringRoutine, 'days')//.format("MMM Do YYYY");
       const nextWater = moment(nextWaterDate).startOf('day').fromNow()
-      const today = moment().format('DD-MM-YYYY')
-      return {...userplant, nextWater, today}
+      const today = moment().format('YYYY-MM-DD')
+      const startOfThisYear = moment().format('YYYY-01-01')
+      return {...userplant, nextWater, today, startOfThisYear}
     })
     res.render("dashboard/profile", { user, userplants })
   })

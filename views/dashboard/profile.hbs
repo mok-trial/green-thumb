@@ -31,7 +31,7 @@
             <form action="/profile/{{this._doc._id}}" method="POST">
                 <label for="lastWater" class>Last Watered:</label>
                 <input type="date" id="lastWater" name="lastWater" data-id="{{this._doc._id}}"
-                    data-value="{{this._doc.lastWater}}" value="{{this._doc.lastWater}}" max="{{today}}"
+                    data-value="{{this._doc.lastWater}}" value="{{this._doc.lastWater}}" min="{{startOfThisYear}}" max="{{today}}"
                     onchange="handleChange(`{{this._doc._id}}`)">
                 <div>
                     <button type="submit" data-id="{{this._doc._id}}" style="visibility: hidden">Update</button>
