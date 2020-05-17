@@ -48,7 +48,7 @@ router.get('/', loginCheck(), (req, res) => {
       return;
     }
  
-    const defaultUserImage = "https://res.cloudinary.com/rootdirectory/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
+    const defaultUserImage = "https://res.cloudinary.com/karlkris/image/upload/v1588166094/user-plants/rootdir-assets/default-plant.png";
     let imgPath = req.file ? req.file.url : defaultUserImage;
     let imgName = req.file ? req.file.originalname : 'default-image';
    
