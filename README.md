@@ -14,6 +14,39 @@
 ## Demo
 <img src="https://res.cloudinary.com/karlkris/image/upload/v1589714187/github/rootdirectory_demo_fovajf.gif" alt="rootdirectory_demo"  />
 
+## Setup
+
+### Requirements
+
+* [Node JS](https://nodejs.org/en/)
+* [npm](https://www.npmjs.com/get-npm)
+* [MongoDB](https://docs.mongodb.com/manual/installation/)
+* [Cloudinary API Key](https://www.cloudinary.com)
+
+### Get Started
+
+First, create the required environment files.
+
+```console
+cp .env.template .env
+```
+
+Second, install the dependencies.
+
+```console
+npm install
+```
+
+### Running BCB
+
+#### Run the following commands from the root folder.
+
+```console
+sudo service mongodb start
+npm start
+```
+
+
 ## Team
 - [bl00dymarie](https://github.com/orgs/mok-trial/people/bl00dymarie/)
 - [karlkristopher](https://github.com/orgs/mok-trial/people/karlkristopher/)
